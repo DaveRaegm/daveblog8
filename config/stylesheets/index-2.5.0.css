@@ -12,31 +12,20 @@ select {
 
 html,
 body {
-  font-size: 16px !important;
-  line-height: 1.15 !important;
-}
-
-body {
+  font-size: 16px;
+  line-height: 1.5; /* Improved line height for readability */
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: var(--font-color);
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-h4 {
-  font-weight: normal;
-  font-size: 0.8rem;
-  line-height: 1rem;
-  margin: 0;
-}
-
-h5 {
+h4, h5 {
   font-weight: normal;
   font-size: 0.8rem;
   line-height: 1rem;
@@ -61,21 +50,16 @@ ul,
 }
 
 .app-header {
-  box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 12px;
   padding: 12px 24px;
   background: var(--app-header-background-color);
   border-bottom: 1px solid var(--app-header-border-color);
-  max-width: 100%;
-  flex-wrap: wrap;
 }
 
 .lanes {
   background: var(--app-background-color);
   padding: 20px;
-  box-sizing: border-box;
   display: flex;
   gap: 40px;
   overflow-x: auto;
@@ -96,58 +80,34 @@ ul,
 input,
 button,
 select {
-  height: 32px;
-  padding: 4px 15px;
+  height: 40px; /* Increased height for better touch targets */
+  padding: 8px 15px;
   border-radius: 6px;
+  border: 1px solid var(--input-border-color);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
   font-size: inherit;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
-  box-sizing: border-box;
   color: var(--font-color);
-  white-space: nowrap;
 }
 
 input,
 select {
   background: var(--input-background-color);
-  border: 1px solid var(--input-border-color);
-}
-
-input {
-  font-size: inherit !important;
-  height: inherit;
-  margin: inherit;
-}
-
-button,
-select {
-  cursor: pointer;
 }
 
 button {
-  transition: all 0.1s;
+  transition: background-color 0.2s ease;
   background: var(--button-background-color);
   border: 1px solid var(--button-border-color);
   color: var(--button-font-color);
-  text-align: center;
-  text-align: -moz-center;
-  text-align: -webkit-center;
+  cursor: pointer;
 }
 
-*:focus-visible, *:focus {
-  /* TODO Required while StacksEditor is being used, since it changes Firefox defaults. Also implies changes on input-error class */
-  outline: 1px solid var(--font-color);
-  border: 1px solid var(--font-color);
+*:focus-visible {
+  outline: 2px solid var(--focus-color); /* Clearer focus indication */
 }
 
 button:hover {
-  transition: all 0.1s;
-  filter: brightness(1.2);
-}
-
-@media (prefers-color-scheme: light) {
-  button:hover {
-    filter: brightness(1.05);
-  }
+  background: var(--button-hover-background-color); /* Define a hover color */
 }
 
 button.small {
@@ -171,17 +131,10 @@ button.small {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: nowrap;
-}
-
-.app-header__group-item-label {
-  white-space: nowrap;
 }
 
 .app-title {
-  margin-top: 12px;
-  margin-left: 20px;
-  margin-bottom: 0;
+  margin: 12px 0 0 20px;
 }
 
 .lane {
@@ -189,7 +142,7 @@ button.small {
   flex-direction: column;
   scroll-snap-align: center;
   max-width: 100%;
-  transition: translate 0.25s;
+  transition: transform 0.2s ease;
 }
 
 .lane__header {
@@ -199,7 +152,6 @@ button.small {
   align-items: center;
   cursor: grab;
   margin-bottom: 12px;
-  max-width: 300px;
 }
 
 .lane__header-name-and-count {
@@ -212,23 +164,17 @@ button.small {
 .lane__header-name {
   min-width: 0;
   word-wrap: break-word;
-  text-wrap: balance;
 }
 
 .lane__content {
   flex-grow: 1;
-  width: 300px;
   background: var(--lane-background-color);
   border-radius: 8px;
   padding: 12px;
-  box-sizing: border-box;
   overflow-y: auto;
-  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin: 0;
-  cursor: grab;
 }
 
 .card {
@@ -241,15 +187,14 @@ button.small {
   justify-content: space-between;
   cursor: pointer;
   font-size: 0.9rem;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
-  border-radius: 6px;
-  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   padding: 12px;
-  transition: translate 0.25s;
+  transition: transform 0.2s ease;
 }
 
-.card.card__drag-disabled {
-  cursor: pointer !important;
+.card:hover {
+  transform: translateY(-2px); /* Subtle lift effect on hover */
 }
 
 .card__name {
@@ -259,10 +204,8 @@ button.small {
 
 .card__toolbar {
   width: 100%;
-  box-sizing: border-box;
   display: flex;
   align-items: start;
-  overflow: hidden;
   margin-bottom: 12px;
 }
 
@@ -271,24 +214,20 @@ button.small {
 }
 
 .card__tags {
-  align-items: start;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  overflow: hidden;
   min-height: 40px;
 }
 
 [popover] {
-  inset: unset;
   position: absolute;
   border-radius: 6px;
   border: 1px solid var(--popup-border-color);
-  box-sizing: border-box;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05), 0 2px 2px rgba(0, 0, 0, 0.05),
     0 4px 4px rgba(0, 0, 0, 0.05), 0 6px 8px rgba(0, 0, 0, 0.05),
     0 8px 16px rgba(0, 0, 0, 0.05);
-  background: none;
+  background: var(--popup-background-color);
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -305,17 +244,8 @@ button.small {
   gap: 8px;
   border: 0;
   text-align: left;
-  background: var(--popup-background-color);
-  border-radius: 0;
+  background: transparent;
   color: var(--popup-font-color);
-}
-
-[popover] > :first-child {
-  border-radius: 6px 6px 0 0;
-}
-
-[popover] > :last-child {
-  border-radius: 0 0 6px 6px;
 }
 
 .tag {
@@ -327,7 +257,7 @@ button.small {
   white-space: nowrap;
 }
 
-.tag--clicable {
+.tag--clickable {
   cursor: pointer;
 }
 
@@ -353,7 +283,6 @@ dialog {
   padding: 0;
   width: 100%;
   height: 100%;
-  inset: 0px;
   border: none;
   background: var(--dialog-background-color);
   border-radius: 5px;
@@ -367,9 +296,7 @@ dialog:not(.dialog--maximized) {
 .dialog__body {
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   padding: 12px;
-  text-align: left;
   height: 100%;
 }
 
@@ -382,19 +309,15 @@ dialog:not(.dialog--maximized) {
 }
 
 .dialog__toolbar-name {
-  /* https://stackoverflow.com/a/36247448 */
   min-width: 0;
   width: 100%;
   word-wrap: break-word;
-  text-wrap: balance;
   display: inline-block;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
   color: var(--font-color);
 }
 
 .dialog__toolbar-btns {
-  flex-grow: 0;
   display: flex;
   gap: 8px;
 }
@@ -402,8 +325,6 @@ dialog:not(.dialog--maximized) {
 .dialog__toolbar-btn {
   width: 35px;
   height: 35px;
-  padding: 0;
-  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -418,7 +339,6 @@ dialog:not(.dialog--maximized) {
   gap: 8px;
   margin-bottom: 12px;
   flex-wrap: wrap;
-  align-items: start;
 }
 
 .dialog__tags .tag {
@@ -465,9 +385,6 @@ a > * {
 
 .editor {
   height: 100%;
-  max-height: none;
-  resize: none;
-  margin-bottom: 4rem;
   background: var(--editor-background-color) !important;
   border-color: var(--input-border-color) !important;
   color: var(--font-color) !important;
@@ -475,10 +392,6 @@ a > * {
 
 .disable-image-upload .js-insert-image-btn {
   display: none;
-}
-
-.editor {
-  resize: none !important;
 }
 
 .editor .s-btn {
@@ -502,11 +415,11 @@ a > * {
 
 .editor .s-popover button {
   color: var(--popup-font-color);
-  border: none 0;
+  border: none;
 }
 
 .editor .s-popover--arrow {
-  color: var(--popup-background-color) important;
+  color: var(--popup-background-color) !important;
 }
 
 .editor pre {
@@ -526,4 +439,14 @@ a > * {
 .being-dragged.card,
 .being-dragged > .lane__content {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 12px 0px;
+}
+
+@media (max-width: 768px) {
+  .lanes {
+    flex-direction: column; /* Stack lanes on smaller screens */
+  }
+
+  .app-header {
+    flex-direction: column; /* Stack header items */
+  }
 }
